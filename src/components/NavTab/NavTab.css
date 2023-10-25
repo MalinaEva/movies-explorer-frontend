@@ -1,0 +1,15 @@
+.hero__button {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    color: #fff;
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, .6);
+    border-radius: 3px;
+    padding: 10px 20px;
+    display: inline-flex;
+}
+
+.hero__button:hover {
+    opacity: .8;
+}

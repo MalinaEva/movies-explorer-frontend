@@ -1,0 +1,139 @@
+.header__container {
+    max-width: 1140px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header {
+    padding: 18px 0;
+    background-color: #073042;
+}
+
+.header__logo {
+    height: 38px;
+    width: 38px;
+}
+
+.header__logo:hover {
+    opacity: .8;
+}
+
+.header_type_white {
+    background-color: #fff;
+    color: #000;
+}
+
+.header__container_type_small {
+    width: 396px;
+    padding: 18px 0;
+}
+
+.header__type_small {
+    padding: 52px 0 22px;
+}
+
+.header__menu-icon {
+    width: 44px;
+    height: 44px;
+    border: none;
+    cursor: pointer;
+    mask: url(../../images/menu.svg);
+    -webkit-mask: url(../../images/menu.svg);
+    display: none;
+    background-color: #000;
+}
+
+.header__menu:hover {
+    opacity: .8;
+}
+
+.header__menu-icon_type_white {
+    background-color: #fff;
+}
+
+.header__close-menu {
+    background: #fff;
+    border: none;
+    width: 22px;
+    padding: 0;
+    height: 22px;
+    margin-left: auto;
+    cursor: pointer;
+    display: none;
+}
+
+.header__close-menu:hover {
+    opacity: .8;
+}
+
+.header__close-icon {
+    width: 22px;
+    height: 22px;
+}
+
+@media (max-width: 1279px) {
+    .header__container {
+        max-width: 100%;
+        padding: 0 14px;
+    }
+
+    .header__menu-icon {
+        display: block;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1279px) {
+    .header__container {
+        padding: 0 30px;
+    }
+
+    .header__type_small {
+        padding-bottom: 13px;
+    }
+
+    .header__container_layout_auth {
+        margin: 180px auto 18px;
+    }
+
+    .header__link {
+        color: #000;
+        font-size: 18px;
+        line-height: 21.78px;
+        font-weight: 500;
+        padding-bottom: 4px;
+    }
+
+    .header__link_active {
+        border-bottom: 2px solid #000;
+    }
+
+    .header__list {
+        width: 340px;
+        flex-direction: column;
+        text-align: center;
+        margin: 116px auto 0;
+        row-gap: 28px;
+    }
+
+    .header__profile {
+        margin: auto auto 70px;
+    }
+}
+
+@media (max-width: 767px) {
+    .header__container {
+        align-items: center;
+        max-width: 100%;
+    }
+
+    .header__container_type_small {
+        width: auto;
+    }
+
+    .header__container_layout_auth {
+        justify-content: center;
+    }
+}
+

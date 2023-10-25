@@ -1,0 +1,25 @@
+.section__header_type_not-found {
+    border: none;
+    font-size: 140px;
+    line-height: 169.43px;
+    text-align: center;
+    margin: 246px 0 4px;
+    padding: 0;
+}
+
+.section__description {
+    font-size: 16px;
+    line-height: 19.36px;
+    text-align: center;
+    margin: 0;
+}
+
+.section__description_type_not-found {
+    margin-bottom: 185px;
+}
+
+.section_type_not-found {
+    margin: 0 auto;
+    max-width: 1140px;
+    text-align: center;
+}

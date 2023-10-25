@@ -1,0 +1,39 @@
+.section__header_type_register {
+    border: none;
+    text-align: left;
+}
+
+.section__header_type_register {
+    width: 396px;
+    margin: 0 auto 40px;
+    padding: 0;
+    font-size: 24px;
+    line-height: 29.05px;
+    font-weight: 500;
+    letter-spacing: normal;
+}
+
+@media (max-width: 767px) {
+    .section_type_register {
+        padding: 0 30px;
+    }
+
+    .form_type_register {
+        width: 100%;
+    }
+
+    .section__header_type_register {
+        font-size: 24px;
+        line-height: 29.05px;
+        letter-spacing: normal;
+        padding-bottom: 12px;
+        margin: 32px auto 68px;
+        text-align: center;
+    }
+
+    .form__btn_type_signup {
+        margin-top: 215px;
+        font-size: 12px;
+        line-height: 14.52px;
+    }
+}

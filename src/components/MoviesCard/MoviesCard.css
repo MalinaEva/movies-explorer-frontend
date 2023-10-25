@@ -1,0 +1,96 @@
+.card__image {
+    max-width: 100%;
+}
+
+.card__row {
+    display: flex;
+    justify-content: space-between;
+    margin: 14px 0 21px;
+}
+
+.card__title {
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 15.73px;
+    margin: 0;
+}
+
+.card__like {
+    background-color: #F9F9F9;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    border: none;
+    cursor: pointer;
+    position: relative;
+}
+
+.card__like:hover {
+    opacity: .8;
+}
+
+.card__like::before {
+    content: "";
+    display: block;
+    width: 10px;
+    height: 8.5px;
+    background-color: #fff;
+    mask: url(../../images/like.svg);
+    -webkit-mask: url(../../images/like.svg);
+}
+
+.card__like_active::before {
+    background-color: #FF3055;
+}
+
+.card__unlike {
+    visibility: hidden;
+    background-color: #F9F9F9;
+    background-image: url(../../images/remove.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    border: none;
+    cursor: pointer;
+    position: relative;
+}
+
+.card__unlike:hover {
+    opacity: .8;
+}
+
+.card:hover .card__unlike {
+    visibility: visible;
+}
+
+.card__footer {
+    border-top: 1px solid #E8E8E8;
+    font-size: 11px;
+    line-height: 13.31px;
+    color: #A0A0A0;
+    padding-top: 6px;
+}
+
+@media (max-width: 767px) {
+    .card__like::before {
+        position: absolute;
+        top: 5px;
+        right: 7px;
+    }
+
+    .card__title {
+        font-size: 12px;
+        line-height: 14.52px;
+    }
+
+    .card__row {
+        margin: 14px 0 21px;
+    }
+
+    .card__footer {
+        font-size: 10px;
+        line-height: 12.1px;
+    }
+}

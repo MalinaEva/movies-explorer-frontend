@@ -1,0 +1,160 @@
+.section_type_about {
+    background-color: #fff;
+    padding: 110px 50px 96px;
+}
+
+.about {
+    margin: 0 auto;
+    padding: 0;
+    max-width: 1140px;
+}
+
+.about__header {
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 26.63px;
+    border-bottom: 1px solid #000;
+    padding-bottom: 23px;
+    margin-bottom: 70px;
+}
+
+.about__columns {
+    display: flex;
+    gap: 50px;
+}
+
+.about__column-title {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24.2px;
+    margin: 0 0 26px;
+    letter-spacing: -0.8px;
+}
+
+.about__text {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    margin: 0;
+}
+
+.about__deadline {
+    margin-top: 110px;
+    display: flex;
+}
+
+.about__deadline-date {
+    padding: 9px 14px;
+    text-align: center;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16.94px;
+}
+
+.about__deadline-item_backend {
+    width: 20%;
+    background-color: #2BE080;
+}
+
+.about__deadline-item_frontend {
+    width: 80%;
+    background-color: #F2F2F2;
+}
+
+.about__deadline-description {
+    padding: 16px 14px;
+}
+
+.about__deadline-description {
+    background-color: #fff;
+    margin: 0;
+    text-align: center;
+    color: #A0A0A0;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+
+@media (min-width: 768px) and (max-width: 1279px) {
+    .about {
+        max-width: 100%;
+    }
+
+    .about__text {
+        font-size: 12px;
+        line-height: 18px;
+    }
+
+    .about__column-title {
+        margin-bottom: 22px;
+    }
+
+    .about__columns {
+        gap: 37px;
+    }
+
+    .about__deadline {
+        margin-top: 93px;
+    }
+
+    .about__deadline-item_backend {
+        width: 21%;
+    }
+
+    .about__deadline-item_frontend {
+        width: 79%;
+    }
+
+    .section_type_about {
+        padding: 90px 50px 73px;
+    }
+}
+
+@media (max-width: 767px) {
+    .section_type_about {
+        padding: 70px 18px;
+    }
+
+    .about__columns {
+        flex-direction: column;
+        gap: 57px;
+    }
+
+    .about__column-title {
+        font-size: 18px;
+        line-height: 21.78px;
+        letter-spacing: -0.72px;
+        margin-bottom: 15px;
+    }
+
+    .about__text {
+        font-size: 11px;
+        line-height: 16px;
+    }
+
+    .about__deadline {
+        margin-top: 61px;
+    }
+
+    .about__deadline-date {
+        font-size: 11px;
+        line-height: 13.31px;
+        padding: 10px;
+    }
+
+    .about__deadline-description {
+        font-size: 11px;
+        line-height: 13.31px;
+        padding: 12px;
+    }
+
+    .about__deadline-item_backend {
+        width: 35%;
+    }
+
+    .about__deadline-item_frontend {
+        width: 65%;
+    }
+}

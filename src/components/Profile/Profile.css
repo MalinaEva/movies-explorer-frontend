@@ -1,0 +1,41 @@
+.section_type_profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.section__header_type_profile {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29.05px;
+    text-align: center;
+    margin: 74px auto 120px;
+    border: none;
+    padding: 0;
+    letter-spacing: normal;
+}
+
+@media (min-width: 768px) and (max-width: 1279px) {
+    .section__header_type_profile {
+        margin: 226px auto 94px;
+    }
+}
+
+@media (max-width: 767px) {
+    .section__header_type_profile {
+        margin: 61px auto 77px;
+    }
+
+    .section_type_profile {
+        padding: 0 30px;
+    }
+
+    .form_type_edit-profile {
+        width: 100%;
+    }
+
+    .form__btn_type_edit {
+        margin-top: 375px;
+    }
+}
