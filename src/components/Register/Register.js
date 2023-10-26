@@ -17,7 +17,7 @@ function Register () {
             <h1 className="section__header section__header_type_register">Добро пожаловать!</h1>
             <FormComponent formType="register">
                 <div className="form__row form__row_layout_column">
-                    <FormLabel additionalClass="form_label_size_small">Имя</FormLabel>
+                    <FormLabel additionalClass="form__label_size_small">Имя</FormLabel>
                     <FormInput additionalClass="form__input_type_auth" placeholder="Введите имя"
                                value={name}
                                onChange={(e) => setName(e.target.value)}
@@ -37,7 +37,7 @@ function Register () {
                     <FormLabel>Пароль</FormLabel>
                     <FormInput additionalClass="form__input_type_auth form__input_invalid" inputType="password"
                                placeholder="Введите пароль"
-                               validationProps={{ required: true, minLength: 6 }}
+                               validationProps={{ required: true, minLength: 6, maxLength: 40 }}
                                value={password}
                                onChange={(e) => setPassword(e.target.value)}
                     />
@@ -47,7 +47,7 @@ function Register () {
                     <FormButton buttonType="submit" type="signup">Зарегистрироваться</FormButton>
                 </div>
             </FormComponent>
-            <p className="form__helptext">Уже зарегистрированы? <Link className="form__link" to="/signin">Войти</Link>
+            <p className="helptext">Уже зарегистрированы? <Link className="section__link" to="/signin">Войти</Link>
             </p>
         </SectionComponent>
     );

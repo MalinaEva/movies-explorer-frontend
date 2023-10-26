@@ -1,9 +1,6 @@
 .section__header_type_register {
     border: none;
     text-align: left;
-}
-
-.section__header_type_register {
     width: 396px;
     margin: 0 auto 40px;
     padding: 0;
@@ -11,6 +8,20 @@
     line-height: 29.05px;
     font-weight: 500;
     letter-spacing: normal;
+}
+
+.helptext {
+    font-size: 14px;
+    line-height: 16.94px;
+    text-align: center;
+    color: #A0A0A0;
+    margin: 16px 0 70px;
+}
+
+@media (min-width: 768px) and (max-width: 1279px) {
+    .section__header_type_register {
+        padding-top: 10px;
+    }
 }
 
 @media (max-width: 767px) {
@@ -33,6 +44,11 @@
 
     .form__btn_type_signup {
         margin-top: 215px;
+        font-size: 12px;
+        line-height: 14.52px;
+    }
+
+    .helptext {
         font-size: 12px;
         line-height: 14.52px;
     }

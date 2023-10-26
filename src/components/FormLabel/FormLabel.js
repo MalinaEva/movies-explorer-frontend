@@ -2,7 +2,7 @@ import './FormLabel.css';
 
 function FormLabel ({ additionalClass = '', children }) {
     return (
-        <label className={`form__label ${additionalClass}`} htmlFor="">
+        <label className={`form__label ${additionalClass}`}>
             {children}
         </label>
     );

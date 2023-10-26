@@ -4,7 +4,7 @@ import Navigation from '../Navigation/Navigation';
 import './Header.css';
 import { useState } from 'react';
 
-function Header () {
+function Header ({ login = false }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const location = useLocation();
@@ -16,7 +16,7 @@ function Header () {
     const authRoutes = ['/signup', '/signin'];
 
     if (authRoutes.includes(location.pathname)) {
-        additinonalClassName += ' header__type_small';
+        additinonalClassName += ' header_type_small';
     }
 
     const additionalContainerClass = authRoutes.includes(location.pathname)
@@ -26,12 +26,14 @@ function Header () {
     return (
         <header className={`header ${additinonalClassName}`}>
             <div className={`header__container ${additionalContainerClass}`}>
-                <Link to="/" className="header__link">
+                <Link to="/">
                     <img className="header__logo" src={logo} alt="Логотип"/>
                 </Link>
 
                 {authRoutes.includes(location.pathname) ? '' : <Navigation isMenuOpen={isMenuOpen}
-                                                                           setIsMenuOpen={setIsMenuOpen}/>}
+                                                                           setIsMenuOpen={setIsMenuOpen}
+                                                                           login={login}
+                />}
             </div>
         </header>
     );

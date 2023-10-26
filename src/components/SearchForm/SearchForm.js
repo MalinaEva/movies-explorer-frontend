@@ -5,9 +5,10 @@ import SectionComponent from '../SectionComponent/SectionComponent';
 function SearchForm () {
     return (
         <SectionComponent type="search">
-            <form className="search" action="">
+            <form className="search" action="/">
                 <div className="search__row">
-                    <input className="search__input" type="text" placeholder="Фильм"/>
+                    <label className="sr-only" htmlFor="movie-search">Фильм</label>
+                    <input required id="movie-search" className="search__input" type="text" placeholder="Фильм"/>
                     <button className="search__submit" type="submit">Найти</button>
                 </div>
                 <div className="search__row">

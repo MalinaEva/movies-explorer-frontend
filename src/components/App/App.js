@@ -5,12 +5,12 @@ import Footer from '../Footer/Footer';
 
 function App () {
     const location = useLocation();
-    // const withoutHeader = ['/signin', '/signup'];
     const withoutFooter = ['/signin', '/signup', '/profile'];
 
     return (
         <div className="page">
-            <Header/>
+            {location.pathname === '/' && <Header login={true}/>}
+            {location.pathname === '/' ? <Header login={false}/> : <Header login={true}/>}
             <main className="content">
                 <Outlet/>
             </main>

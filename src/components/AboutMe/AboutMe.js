@@ -17,7 +17,7 @@ function AboutMe () {
                         С&nbsp;2015 года работал в&nbsp;компании &laquo;СКБ Контур&raquo;. После того, как прошёл курс
                         по&nbsp;веб-разработке, начал заниматься фриланс-заказами и&nbsp;ушёл с&nbsp;постоянной
                         работы.</p>
-                    <a href="https://github.com/MalinaEva" className="student__link">Github</a>
+                    <a target="_blank" rel="noreferrer" href="https://github.com/MalinaEva" className="student__link">Github</a>
                 </div>
                 <img className="student__avatar" src={avatar} alt="Виталий"/>
                 <Portfolio/>

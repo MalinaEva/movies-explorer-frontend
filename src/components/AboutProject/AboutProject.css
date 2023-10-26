@@ -38,8 +38,10 @@
     margin: 0;
 }
 
-.about__deadline {
-    margin-top: 110px;
+.about__deadline-list {
+    padding: 0;
+    list-style: none;
+    margin: 110px 0 0;
     display: flex;
 }
 
@@ -95,7 +97,7 @@
         gap: 37px;
     }
 
-    .about__deadline {
+    .about__deadline-list {
         margin-top: 93px;
     }
 
@@ -134,7 +136,7 @@
         line-height: 16px;
     }
 
-    .about__deadline {
+    .about__deadline-list {
         margin-top: 61px;
     }
 
