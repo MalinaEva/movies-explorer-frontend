@@ -157,7 +157,7 @@
     }
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 768px) {
     .header__link_active {
         font-weight: 500;
     }

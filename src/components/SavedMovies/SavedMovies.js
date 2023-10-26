@@ -44,7 +44,7 @@ function SavedMovies () {
                         {CARDS.filter(card => card.liked)
                         .slice(0, cardLimit)
                         .map((card) => (
-                            <li className="card-list__item" key={card.id}>
+                            <li className="cards-list__item" key={card.id}>
                                 <MoviesCard id={card.id} name={card.name} liked={card.liked} isSaved={true}/>
                             </li>
                         ))}

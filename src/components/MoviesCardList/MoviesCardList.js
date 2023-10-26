@@ -45,7 +45,7 @@ function MoviesCardList () {
                     <SectionComponent type="cards">
                         <ul className="cards-list">
                             {CARDS.slice(0, cardLimit).map((card) => (
-                                <li className="card-list__item" key={card.id}>
+                                <li className="cards-list__item" key={card.id}>
                                     <MoviesCard id={card.id} name={card.name} liked={card.liked}/>
                                 </li>
                             ))}
