@@ -1,0 +1,99 @@
+.section__header {
+    margin: 0 auto 70px;
+    max-width: 1140px;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 26.63px;
+    border-bottom: 1px solid #000;
+    padding-bottom: 20px;
+    letter-spacing: -1.04px;
+}
+
+.section_type_student {
+    background-color: #fff;
+    padding: 110px 0 125px;
+}
+
+.section__link {
+    color: #3456F3;
+    text-decoration: none;
+    font-size: 14px;
+    line-height: 16.94px;
+}
+
+.section__link:hover {
+    opacity: .7;
+}
+
+@media (min-width: 768px) and (max-width: 1279px) {
+    .section__header {
+        padding-bottom: 24px;
+    }
+
+    .section_type_student {
+        padding: 90px 50px;
+    }
+
+    .section_type_search {
+        padding: 0 30px;
+    }
+
+    .section_type_saved-cards {
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: 30px;
+        grid-row-gap: 30px;
+        max-width: 100%;
+        padding: 70px 30px 0;
+        margin-bottom: 170px;
+    }
+
+    .section__header_type_register {
+        padding-bottom: 0;
+    }
+
+    .section_type_register {
+        padding-bottom: 230px;
+    }
+
+    .section__header_type_login {
+        padding-bottom: 0;
+    }
+
+    .section_type_login {
+        padding-bottom: 230px;
+    }
+}
+
+
+@media (max-width: 767px) {
+    .section__header {
+        font-size: 18px;
+        line-height: 21.78px;
+        letter-spacing: -0.72px;
+        padding-bottom: 28px;
+        margin-bottom: 61px;
+        max-width: 100%;
+    }
+
+    .section_type_student {
+        padding: 80px 14px 70px;
+    }
+
+    .section_type_login {
+        padding: 0 30px;
+    }
+
+    .section__header_type_login {
+        text-align: center;
+        margin: 23px auto 80px;
+    }
+
+    .form__btn_type_signin {
+        margin-top: 310px;
+    }
+
+    .section__link {
+        font-size: 12px;
+        line-height: 14.52px;
+    }
+}

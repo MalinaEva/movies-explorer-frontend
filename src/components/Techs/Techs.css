@@ -1,0 +1,139 @@
+.tech {
+    padding-bottom: 104px;
+}
+
+.section_type_tech {
+    background-color: #F5F5F5;
+}
+
+.section__header_type_tech {
+    margin-bottom: 90px;
+    padding-top: 101px;
+}
+
+.tech__header {
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 58px;
+    text-align: center;
+    width: 600px;
+    margin: 0 auto;
+    letter-spacing: -2px;
+}
+
+.tech__text {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    margin: 26px auto 0;
+    max-width: 460px;
+    letter-spacing: -0.56px;
+}
+
+.tech__buttons {
+    display: flex;
+    gap: 10px;
+    margin: 100px auto 0;
+    max-width: 600px;
+    justify-content: center;
+    list-style-type: none;
+    padding: 0;
+}
+
+.tech__button {
+    font-size: 14px;
+    line-height: 16.94px;
+    color: #000;
+    text-align: center;
+    padding: 21px 14px 22px;
+    background-color: #E8E8E8;
+    border-radius: 10px;
+    min-width: 90px;
+    box-sizing: border-box;
+    letter-spacing: -0.56px;
+}
+
+@media (min-width: 768px) and (max-width: 1279px) {
+    .tech {
+        padding-bottom: 0;
+    }
+
+    .tech__text {
+        font-size: 12px;
+        line-height: 18px;
+        letter-spacing: -0.48px;
+        margin-top: 22px;
+    }
+
+    .tech__buttons {
+        margin-top: 83px;
+    }
+
+    .tech__button {
+        min-width: 84px;
+        font-size: 12px;
+        line-height: 14.52px;
+        letter-spacing: -0.48px;
+    }
+
+    .section_type_tech {
+        padding: 90px 50px;
+    }
+
+    .section__header_type_tech {
+        margin-bottom: 79px;
+        padding-top: 0;
+    }
+}
+
+
+@media (max-width: 767px) {
+    .section__header_type_tech {
+        margin: 0 18px;
+        padding-top: 0;
+    }
+
+    .tech {
+        padding: 0 18px;
+        max-width: 100%;
+    }
+
+    .tech__header {
+        font-size: 30px;
+        line-height: 36.31px;
+        letter-spacing: -1.2px;
+        width: auto;
+        text-align: center;
+        margin-top: 58px;
+    }
+
+    .tech__text {
+        font-size: 11px;
+        line-height: 16px;
+        letter-spacing: -0.44px;
+        text-align: center;
+        margin: 23px auto 0;
+    }
+
+    .tech__buttons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: normal;
+        max-width: 178px;
+        margin-top: 52px;
+    }
+
+    .tech__button {
+        width: 84px;
+        min-width: 84px;
+        font-size: 12px;
+        line-height: 14.52px;
+        letter-spacing: -0.48px;
+    }
+
+    .section_type_tech {
+        padding: 58px 0;
+        background-color: #fff;
+    }
+}
