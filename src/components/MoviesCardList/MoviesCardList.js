@@ -7,6 +7,7 @@ import Preloader from '../Preloader/Preloader';
 
 function MoviesCardList () {
     const [isLoading, setIsLoading] = useState(true);
+    const [cardLimit, setCardLimit] = useState(5);
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -14,6 +15,24 @@ function MoviesCardList () {
         }, 500);
 
         return () => clearTimeout(timer);
+    }, []);
+
+    useEffect(() => {
+        const handleResize = () => {
+            const width = window.innerWidth;
+            if (width > 1279) {
+                setCardLimit(16);
+            } else if (width <= 1279 && width >= 768) {
+                setCardLimit(8);
+            } else {
+                setCardLimit(5);
+            }
+        };
+
+        window.addEventListener('resize', handleResize);
+        handleResize();
+
+        return () => window.removeEventListener('resize', handleResize);
     }, []);
 
 
@@ -24,14 +43,16 @@ function MoviesCardList () {
             ) : (
                 <>
                     <SectionComponent type="cards">
-                        {CARDS
-                        .slice(0, 5)
-                        .map((card) => (
-                            <MoviesCard key={card.id} id={card.id} name={card.name} liked={card.liked} />
-                        ))}
+                        <ul className="cards-list">
+                            {CARDS.slice(0, cardLimit).map((card) => (
+                                <li className="card-list__item" key={card.id}>
+                                    <MoviesCard id={card.id} name={card.name} liked={card.liked}/>
+                                </li>
+                            ))}
+                        </ul>
                     </SectionComponent>
                     <SectionComponent type="more">
-                        <button className="button__more">Ещё</button>
+                        <button type="button" className="section__button-more">Ещё</button>
                     </SectionComponent>
                 </>
             )}

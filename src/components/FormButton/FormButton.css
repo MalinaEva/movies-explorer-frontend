@@ -14,13 +14,14 @@
 
 .form__btn_type_edit {
     color: #000;
-    margin-top: 217px;
+    margin-top: 205px;
 }
 
 .form__btn_type_logout {
     color: #FF3055;
     font-weight: 500;
     margin: 14px 0 70px;
+    text-decoration: none;
 }
 
 .form__btn_type_signup {
@@ -50,12 +51,16 @@
 
 @media (min-width: 768px) and (max-width: 1279px) {
     .form__btn_type_edit {
-        margin-top: 207px;
+        margin-top: 196px;
     }
 }
 
 @media (max-width: 767px) {
     .form__btn_type_edit {
-        margin-top: 375px;
+        margin-top: 363px;
+    }
+
+    .form__btn_type_signin {
+        margin-top: 310px;
     }
 }

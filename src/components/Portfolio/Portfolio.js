@@ -6,14 +6,17 @@ function Portfolio () {
             <h4 className="student__portfolio-header">Портфолио</h4>
             <ul className="student__portfolio-links">
                 <li className="student__portfolio-item">
-                    <a href="https://github.com/MalinaEva/russian-travel" className="student__portfolio-link">Статичный
+                    <a target="_blank" href="https://github.com/MalinaEva/russian-travel"
+                       className="student__portfolio-link">Статичный
                         сайт</a>
                 </li>
                 <li className="student__portfolio-item">
-                    <a href="https://github.com/MalinaEva/mesto" className="student__portfolio-link">Адаптивный сайт</a>
+                    <a target="_blank" href="https://github.com/MalinaEva/mesto" className="student__portfolio-link">Адаптивный
+                        сайт</a>
                 </li>
                 <li className="student__portfolio-item">
-                    <a href="https://github.com/MalinaEva/mesto-react" className="student__portfolio-link">Одностраничное
+                    <a target="_blank" href="https://github.com/MalinaEva/mesto-react"
+                       className="student__portfolio-link">Одностраничное
                         приложение</a>
                 </li>
             </ul>

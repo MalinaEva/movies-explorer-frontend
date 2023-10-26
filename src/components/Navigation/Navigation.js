@@ -5,7 +5,7 @@ import { MENU } from '../../utils/menu';
 import remove from '../../images/remove.svg';
 import { useCallback, useEffect } from 'react';
 
-function Navigation ({ isMenuOpen, setIsMenuOpen }) {
+function Navigation ({ isMenuOpen, setIsMenuOpen, login }) {
     const closeMenu = useCallback(() => {
         setIsMenuOpen(false);
     }, [setIsMenuOpen]);
@@ -32,7 +32,8 @@ function Navigation ({ isMenuOpen, setIsMenuOpen }) {
 
     return (
         <>
-            <button className={`header__menu-icon ${location.pathname === '/' ? 'header__menu-icon_type_white' : ''}`}
+            <button type="button"
+                    className={`header__menu-icon ${location.pathname === '/' ? 'header__menu-icon_type_white' : ''}`}
                     onClick={openMenu}
             />
             <div onClick={closeMenu} className={`overlay ${isMenuOpen ? 'overlay_opened' : ''}`}></div>
@@ -40,26 +41,41 @@ function Navigation ({ isMenuOpen, setIsMenuOpen }) {
                 <button type="button" className="header__close-menu" onClick={closeMenu}>
                     <img className="header__close-icon" src={remove} alt="закрыть"/>
                 </button>
-                <ul className="header__list">
-                    {MENU.map((item) => (
-                        <li key={item.id}
-                            className={`header__item ${item.onlyMobile ? 'header__item_type_mobile' : ''}`}>
-                            <Link to={item.link}
-                                  onClick={closeMenu}
-                                  className={`header__link ${additinonalClassName} ${location.pathname === item.link ? 'header__link_active' : ''}`}>{item.title}</Link>
-                        </li>
-                    ))}
-                </ul>
+                {login &&
+                    <ul className="header__list">
+                        {MENU.map((item) => (
+                            <li key={item.id}
+                                className={`header__item ${item.onlyMobile ? 'header__item_type_mobile' : ''}`}>
+                                <Link to={item.link}
+                                      onClick={closeMenu}
+                                      className={`header__link ${additinonalClassName} ${location.pathname === item.link ? 'header__link_active' : ''}`}>{item.title}</Link>
+                            </li>
+                        ))}
+                    </ul>
+                }
                 <div className="header__profile">
-                    <Link to="/profile"
-                          onClick={closeMenu}
-                          className={`header__button header__button_rounded
-                      ${location.pathname === '/'
-                              ? ''
-                              : 'header__button_theme_white'
-                          }`}>Аккаунт
+                    {login ? <Link
+                            to="/profile"
+                            onClick={closeMenu}
+                            className={`header__button header__button_rounded
+                            ${location.pathname === '/'
+                                ? ''
+                                : 'header__button_theme_white'
+                            }`}
+                        >
+                            Аккаунт
                         <img className="header__profile-img" src={profile} alt="аккаунт"/>
                     </Link>
+                        : <>
+                            <Link
+                                className={`header__link header__link_type_signup ${location.pathname !== '/' ? 'header__link_type_dark' : ''}`}
+                                to="/signup">
+                                Регистрация
+                            </Link>
+                            <Link className="header__button header__button_type_signin " to="/signin">
+                                Войти
+                            </Link>
+                        </>}
                 </div>
             </nav>
         </>

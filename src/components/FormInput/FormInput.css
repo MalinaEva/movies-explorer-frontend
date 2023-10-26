@@ -15,6 +15,7 @@
 .form__input_type_right {
     text-align: right;
     margin-left: 10px;
+    padding: 8px 4px;
 }
 
 .form__input_type_right:hover {

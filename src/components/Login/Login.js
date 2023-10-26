@@ -27,7 +27,7 @@ function Login () {
                 <div className="form__row form__row_layout_column">
                     <FormLabel>Пароль</FormLabel>
                     <FormInput additionalClass="form__input_type_auth" inputType="password" placeholder="Введите пароль"
-                               validationProps={{ required: true, minLength: 6 }}
+                               validationProps={{ required: true, minLength: 6, maxLength: 40 }}
                                value={password}
                                onChange={(e) => setPassword(e.target.value)}
                     />
@@ -36,7 +36,7 @@ function Login () {
                     <FormButton buttonType="submit" type="signin">Войти</FormButton>
                 </div>
             </FormComponent>
-            <p className="form__helptext">Ещё не зарегистрированы? <Link className="form__link"
+            <p className="helptext">Ещё не зарегистрированы? <Link className="section__link"
                                                                          to="/signup">Регистрация</Link></p>
         </SectionComponent>
     );

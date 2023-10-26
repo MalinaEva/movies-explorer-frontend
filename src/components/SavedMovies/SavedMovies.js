@@ -7,6 +7,7 @@ import SearchForm from '../SearchForm/SearchForm';
 
 function SavedMovies () {
     const [isLoading, setIsLoading] = useState(true);
+    const [cardLimit, setCardLimit] = useState(3);
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -16,6 +17,22 @@ function SavedMovies () {
         return () => clearTimeout(timer);
     }, []);
 
+    useEffect(() => {
+        const handleResize = () => {
+            const width = window.innerWidth;
+            if (width < 768) {
+                setCardLimit(2);
+            } else {
+                setCardLimit(3);
+            }
+        };
+
+        window.addEventListener('resize', handleResize);
+        handleResize();
+
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
     return (
         <>
             <SearchForm/>
@@ -23,12 +40,17 @@ function SavedMovies () {
                 <Preloader/>
             ) : (
                 <SectionComponent type="cards">
-                    {CARDS.filter(card => card.liked)
-                    .slice(0, 2)
-                    .map((card) => (
-                        <MoviesCard key={card.id} id={card.id} name={card.name} liked={card.liked} isSaved={true}/>
-                    ))}
+                    <ul className="cards-list">
+                        {CARDS.filter(card => card.liked)
+                        .slice(0, cardLimit)
+                        .map((card) => (
+                            <li className="card-list__item" key={card.id}>
+                                <MoviesCard id={card.id} name={card.name} liked={card.liked} isSaved={true}/>
+                            </li>
+                        ))}
+                    </ul>
                 </SectionComponent>
+
             )}
         </>
     );

@@ -19,7 +19,38 @@
 }
 
 .section_type_not-found {
-    margin: 0 auto;
     max-width: 1140px;
     text-align: center;
+    margin: 0 auto 60px;
 }
+
+@media (min-width: 768px) and (max-width: 1279px) {
+    .section__header_type_not-found {
+        margin: 408px auto 0;
+        padding-bottom: 0;
+    }
+
+    .section_type_not-found {
+        padding-bottom: 230px;
+    }
+}
+
+@media (max-width: 767px) {
+    .section_type_not-found {
+        padding: 0 10px;
+    }
+
+    .section__header_type_not-found {
+        font-size: 80px;
+        line-height: 96.84px;
+        margin: 330px auto 10px;
+        padding: 0;
+    }
+
+    .section__description_type_not-found {
+        font-size: 12px;
+        line-height: 14.52px;
+        margin-bottom: 284px;
+    }
+}
+

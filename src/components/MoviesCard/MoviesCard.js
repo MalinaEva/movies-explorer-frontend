@@ -7,8 +7,8 @@ function MoviesCard ({ id, name, liked, isSaved = false }) {
             <div className="card__row">
                 <h2 className="card__title">{name}</h2>
                 {isSaved
-                    ? <button className="card__unlike"></button>
-                    : <button className={`card__like ${liked ? 'card__like_active' : ''}`}></button>
+                    ? <button type="button" className="card__unlike"></button>
+                    : <button type="button" className={`card__like ${liked ? 'card__like_active' : ''}`}></button>
                 }
             </div>
             <div className="card__footer">
