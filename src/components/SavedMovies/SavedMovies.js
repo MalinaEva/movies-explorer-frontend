@@ -1,51 +1,74 @@
 import SectionComponent from '../SectionComponent/SectionComponent';
-import { CARDS } from '../../utils/testData';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import { useEffect, useState } from 'react';
 import Preloader from '../Preloader/Preloader';
 import SearchForm from '../SearchForm/SearchForm';
+import { deleteMovie, getSavedMovies } from '../../utils/MainApi';
+import { useToast } from '../../contexts/ToastContext';
+import { filterMovies } from '../../utils/helpers';
+import { useMovies } from '../../contexts/MoviesContext';
 
 function SavedMovies () {
-    const [isLoading, setIsLoading] = useState(true);
-    const [cardLimit, setCardLimit] = useState(3);
+    const [isLoading, setIsLoading] = useState(false);
+    const { movies, setMovies, savedMovies, setSavedMovies } = useMovies();
+    const [cards, setCards] = useState([]);
+    const [keyword, setKeyword] = useState('');
+    const [isShort, setIsShort] = useState(false);
+    const { addToast } = useToast();
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setIsLoading(false);
-        }, 500);
-
-        return () => clearTimeout(timer);
-    }, []);
-
-    useEffect(() => {
-        const handleResize = () => {
-            const width = window.innerWidth;
-            if (width < 768) {
-                setCardLimit(2);
-            } else {
-                setCardLimit(3);
+    const handleDelete = async (movie) => {
+        try {
+            await deleteMovie(movie._id, localStorage.getItem('token'));
+            addToast('Фильм успешно удалён', 'success');
+        } catch (err) {
+            addToast(`${err.message || err}`, 'error');
+            return;
+        }
+        setSavedMovies(savedMovies.filter(savedMovie => savedMovie._id !== movie._id));
+        setMovies(movies.map((item) => {
+            if (item.id === movie.movieId) {
+                return {
+                    ...item,
+                    isLiked: false
+                };
             }
-        };
+            return item;
+        }));
+        setCards(cards.filter((item) => item._id !== movie._id));
+    };
 
-        window.addEventListener('resize', handleResize);
-        handleResize();
+    useEffect(() => {
+        setIsLoading(true);
+        getSavedMovies(localStorage.getItem('token'))
+        .then((cards) => {
+            setCards(cards);
+            setSavedMovies(cards);
+        })
+        .catch((err) => {
+            addToast(`${err.message || err}`);
+        })
+        .finally(() => {
+            setIsLoading(false);
+        });
+    }, [addToast, setSavedMovies]);
 
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
+    const handleSubmit = async () => {
+        const filtered = filterMovies(cards, keyword, isShort);
+        setSavedMovies(filtered);
+    };
 
     return (
         <>
-            <SearchForm/>
+            <SearchForm keyword={keyword} onKeywordChange={setKeyword} onSubmit={handleSubmit} isShort={isShort}
+                        setIsShort={setIsShort}/>
             {isLoading ? (
                 <Preloader/>
             ) : (
                 <SectionComponent type="cards">
                     <ul className="cards-list">
-                        {CARDS.filter(card => card.liked)
-                        .slice(0, cardLimit)
-                        .map((card) => (
-                            <li className="cards-list__item" key={card.id}>
-                                <MoviesCard id={card.id} name={card.name} liked={card.liked} isSaved={true}/>
+                        {savedMovies.map((card) => (
+                            <li className="cards-list__item" key={card._id}>
+                                <MoviesCard card={card} isSaved={true} handleLike={handleDelete}/>
                             </li>
                         ))}
                     </ul>

@@ -4,8 +4,11 @@ import './Navigation.css';
 import { MENU } from '../../utils/menu';
 import remove from '../../images/remove.svg';
 import { useCallback, useEffect } from 'react';
+import { useCurrentUser } from '../../contexts/CurrentUserContext';
 
-function Navigation ({ isMenuOpen, setIsMenuOpen, login }) {
+function Navigation ({ isMenuOpen, setIsMenuOpen }) {
+    const { currentUser } = useCurrentUser();
+
     const closeMenu = useCallback(() => {
         setIsMenuOpen(false);
     }, [setIsMenuOpen]);
@@ -41,7 +44,7 @@ function Navigation ({ isMenuOpen, setIsMenuOpen, login }) {
                 <button type="button" className="header__close-menu" onClick={closeMenu}>
                     <img className="header__close-icon" src={remove} alt="закрыть"/>
                 </button>
-                {login &&
+                {currentUser &&
                     <ul className="header__list">
                         {MENU.map((item) => (
                             <li key={item.id}
@@ -54,28 +57,30 @@ function Navigation ({ isMenuOpen, setIsMenuOpen, login }) {
                     </ul>
                 }
                 <div className="header__profile">
-                    {login ? <Link
-                            to="/profile"
-                            onClick={closeMenu}
-                            className={`header__button header__button_rounded
+                    {currentUser && <Link
+                        to="/profile"
+                        onClick={closeMenu}
+                        className={`header__button header__button_rounded
                             ${location.pathname === '/'
-                                ? ''
-                                : 'header__button_theme_white'
-                            }`}
-                        >
-                            Аккаунт
+                            ? ''
+                            : 'header__button_theme_white'
+                        }`}
+                    >
+                        Аккаунт
                         <img className="header__profile-img" src={profile} alt="аккаунт"/>
-                    </Link>
-                        : <>
-                            <Link
-                                className={`header__link header__link_type_signup ${location.pathname !== '/' ? 'header__link_type_dark' : ''}`}
-                                to="/signup">
-                                Регистрация
-                            </Link>
-                            <Link className="header__button header__button_type_signin " to="/signin">
-                                Войти
-                            </Link>
-                        </>}
+                    </Link>}
+
+                    {location.pathname === '/' && !currentUser && <>
+                        <Link
+                            className={`header__link header__link_type_signup ${location.pathname !== '/' ? 'header__link_type_dark' : ''}`}
+                            to="/signup">
+                            Регистрация
+                        </Link>
+                        <Link className="header__button header__button_type_signin " to="/signin">
+                            Войти
+                        </Link>
+                    </>
+                    }
                 </div>
             </nav>
         </>

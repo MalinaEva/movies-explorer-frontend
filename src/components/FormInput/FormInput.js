@@ -1,14 +1,18 @@
 import './FormInput.css';
 
-function FormInput ({ value, onChange, placeholder, validationProps, additionalClass = '', inputType = 'text' }) {
+function FormInput ({ name, value, onChange, placeholder, rules, error, additionalClass = '', inputType = 'text' }) {
     return (
-        <input className={`form__input ${additionalClass}`}
-               type={inputType}
-               placeholder={placeholder}
-               value={value}
-               onChange={onChange}
-               {...validationProps}
-        />
+        <>
+            <input className={`form__input ${additionalClass}`}
+                   type={inputType}
+                   placeholder={placeholder}
+                   name={name}
+                   value={value}
+                   onChange={onChange}
+                   {...rules}
+            />
+            {error && <p className="form__error">{error}</p>}
+        </>
     );
 }
 

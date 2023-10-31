@@ -4,47 +4,95 @@ import FormComponent from '../FormComponent/FormComponent';
 import FormLabel from '../FormLabel/FormLabel';
 import FormInput from '../FormInput/FormInput';
 import FormButton from '../FormButton/FormButton';
-import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useCallback, useContext, useState } from 'react';
+import { useFormWithValidation } from '../../hooks/useFormWithValidation';
+import { signIn, signUp } from '../../utils/MainApi';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 function Register () {
-    const [email, setEmail] = useState('pochta@yandex.ru');
-    const [password, setPassword] = useState('12345678');
-    const [name, setName] = useState('Виталий');
+    const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation();
+    const navigate = useNavigate();
+    const [errorMessage, setErrorMessage] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+    const { setCurrentUser } = useContext(CurrentUserContext);
+
+    const handleSubmit = useCallback(
+        async (event) => {
+            event.preventDefault();
+            setErrorMessage('');
+            setIsLoading(true);
+
+            try {
+                const userData = await signUp(values.email, values.password, values.name);
+                const authData = await signIn(values.email, values.password);
+
+                localStorage.setItem('token', authData.token);
+                setCurrentUser(userData);
+                resetForm();
+                navigate('/movies');
+            } catch (err) {
+                setErrorMessage(`${err.message || err}`);
+            } finally {
+                setIsLoading(false);
+            }
+        },
+        [resetForm, values, navigate, setCurrentUser]
+    );
 
     return (
         <SectionComponent type="register">
             <h1 className="section__header section__header_type_register">Добро пожаловать!</h1>
-            <FormComponent formType="register">
+            <FormComponent onSubmit={handleSubmit} formType="register">
                 <div className="form__row form__row_layout_column">
                     <FormLabel additionalClass="form__label_size_small">Имя</FormLabel>
                     <FormInput additionalClass="form__input_type_auth" placeholder="Введите имя"
-                               value={name}
-                               onChange={(e) => setName(e.target.value)}
-                               validationProps={{ minLength: 2, maxLength: 40, required: true }}
+                               name="name"
+                               value={values.name || ''}
+                               onChange={handleChange}
+                               rules={{
+                                   minLength: 2,
+                                   maxLength: 30,
+                                   required: true,
+                                   pattern: '^[a-zA-Zа-яА-ЯёЁ\\s\\-]+$'
+                               }}
+                               error={errors.name}
                     />
                 </div>
                 <div className="form__row form__row_layout_column">
                     <FormLabel>E-mail</FormLabel>
                     <FormInput additionalClass="form__input_type_auth" placeholder="Введите e-mail"
                                inputType="email"
-                               validationProps={{ type: 'email', required: true }}
-                               value={email}
-                               onChange={(e) => setEmail(e.target.value)}
+                               name="email"
+                               value={values.email || ''}
+                               onChange={handleChange}
+                               rules={{
+                                   required: true,
+                                   type: 'email',
+                                   pattern: '[a-z0-9._%+\\-]+@[a-z0-9.\\-]+\\.[a-z]{2,4}$'
+                               }}
+                               error={errors.email}
                     />
                 </div>
                 <div className="form__row form__row_layout_column">
                     <FormLabel>Пароль</FormLabel>
-                    <FormInput additionalClass="form__input_type_auth form__input_invalid" inputType="password"
+                    <FormInput additionalClass="form__input_type_auth" inputType="password"
                                placeholder="Введите пароль"
-                               validationProps={{ required: true, minLength: 6, maxLength: 40 }}
-                               value={password}
-                               onChange={(e) => setPassword(e.target.value)}
+                               name="password"
+                               value={values.password || ''}
+                               onChange={handleChange}
+                               rules={{
+                                   minLength: 6,
+                                   maxLength: 40,
+                                   required: true,
+                               }}
+                               error={errors.password}
                     />
-                    <p className="form__error">Что-то пошло не так...</p>
                 </div>
                 <div className="form__row form__row_type_center">
-                    <FormButton buttonType="submit" type="signup">Зарегистрироваться</FormButton>
+                    <FormButton disabled={!isValid || isLoading} buttonType="submit"
+                                type="signup">Зарегистрироваться</FormButton>
+                    {errorMessage && <p className="form__error">{errorMessage}</p>}
                 </div>
             </FormComponent>
             <p className="helptext">Уже зарегистрированы? <Link className="section__link" to="/signin">Войти</Link>

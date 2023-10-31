@@ -4,7 +4,7 @@ import Navigation from '../Navigation/Navigation';
 import './Header.css';
 import { useState } from 'react';
 
-function Header ({ login = false }) {
+function Header () {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const location = useLocation();
@@ -30,10 +30,9 @@ function Header ({ login = false }) {
                     <img className="header__logo" src={logo} alt="Логотип"/>
                 </Link>
 
-                {authRoutes.includes(location.pathname) ? '' : <Navigation isMenuOpen={isMenuOpen}
-                                                                           setIsMenuOpen={setIsMenuOpen}
-                                                                           login={login}
-                />}
+                <Navigation isMenuOpen={isMenuOpen}
+                            setIsMenuOpen={setIsMenuOpen}
+                />
             </div>
         </header>
     );

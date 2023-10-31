@@ -22,6 +22,16 @@
 .section__button-more:hover {
     opacity: .8;
 }
+
+.not_found {
+    padding: 0;
+    max-width: 1140px;
+    margin: 0 auto;
+    color: #FF3055;
+    font-size: 12px;
+    line-height: 14.52px;
+}
+
 @media (min-width: 768px) and (max-width: 1279px) {
     .section_type_more {
         padding: 0;

@@ -11,6 +11,8 @@ import SavedMovies from './components/SavedMovies/SavedMovies';
 import Profile from './components/Profile/Profile';
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
+import UnauthenticatedRoute from './components/UnauthenticatedRoute/UnauthenticatedRoute';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -19,11 +21,20 @@ root.render(
             <Routes>
                 <Route path="/" element={<App/>}>
                     <Route index element={<Main/>}/>
-                    <Route path="movies" element={<Movies/>}/>
-                    <Route path="saved-movies" element={<SavedMovies/>}/>
-                    <Route path="profile" element={<Profile/>}/>
-                    <Route path="signin" element={<Login/>}/>
-                    <Route path="signup" element={<Register/>}/>
+                    <Route
+                        path="movies"
+                        element={<ProtectedRoute element={<Movies/>}/>}
+                    />
+                    <Route
+                        path="saved-movies"
+                        element={<ProtectedRoute element={<SavedMovies/>}/>}
+                    />
+                    <Route
+                        path="profile"
+                        element={<ProtectedRoute element={<Profile/>}/>}
+                    />
+                    <Route path="signin" element={<UnauthenticatedRoute element={<Login/>}/>}/>
+                    <Route path="signup" element={<UnauthenticatedRoute element={<Register/>}/>}/>
                 </Route>
                 <Route path="*" element={<NotFound/>}/>
             </Routes>

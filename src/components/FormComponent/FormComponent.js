@@ -1,8 +1,8 @@
 import './FormComponent.css';
 
-function FormComponent ({ formType, children }) {
+function FormComponent ({ formType, children, onSubmit }) {
     return (
-        <form className={`form form_type_${formType}`} action="/">
+        <form onSubmit={onSubmit} className={`form form_type_${formType}`} action="/">
             {children}
         </form>
     );
