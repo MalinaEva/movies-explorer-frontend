@@ -3,7 +3,7 @@ import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import SectionComponent from '../SectionComponent/SectionComponent';
 import { useToast } from '../../contexts/ToastContext';
 
-function SearchForm ({ onSubmit, keyword, isShort, setIsShort, onKeywordChange, errorMessage = '' }) {
+function SearchForm ({ onSubmit, onFilter, keyword, isShort, onKeywordChange, errorMessage = '' }) {
     const { addToast } = useToast();
 
     const onSearch = (e) => {
@@ -12,7 +12,7 @@ function SearchForm ({ onSubmit, keyword, isShort, setIsShort, onKeywordChange, 
             addToast('Нужно ввести ключевое слово');
             return;
         }
-        onSubmit(keyword);
+        onSubmit(keyword, isShort);
     };
 
     return (
@@ -20,10 +20,14 @@ function SearchForm ({ onSubmit, keyword, isShort, setIsShort, onKeywordChange, 
             <form onSubmit={onSearch} className="search" action="/">
                 <div className="search__row">
                     <label className="sr-only" htmlFor="movie-search">Фильм</label>
-                    <input value={keyword}
-                           onChange={(e) => onKeywordChange(e.target.value)}
-                           id="movie-search"
-                           className="search__input" type="text" placeholder="Фильм"/>
+                    <input
+                        value={keyword}
+                        onChange={(e) => onKeywordChange(e.target.value)}
+                        id="movie-search"
+                        className="search__input"
+                        type="text"
+                        placeholder="Фильм"
+                    />
                     <button className="search__submit" type="submit">Найти</button>
                 </div>
                 {errorMessage &&
@@ -32,7 +36,7 @@ function SearchForm ({ onSubmit, keyword, isShort, setIsShort, onKeywordChange, 
                     </div>
                 }
                 <div className="search__row">
-                    <FilterCheckbox isShort={isShort} setIsShort={setIsShort}/>
+                    <FilterCheckbox isShort={isShort} onFilter={onFilter}/>
                 </div>
             </form>
         </SectionComponent>

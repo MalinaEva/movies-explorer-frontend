@@ -11,15 +11,21 @@ function MoviesCardList ({ movies, isLoading, onLoadMore, canLoadMore, handleLik
             ) : (
                 <>
                     <SectionComponent type="cards">
-                        {isNotFound ? <p className="not_found">Ничего не найдено</p>
-                            : <ul className="cards-list">
-                                {movies.map((card) => (
-                                <li className="cards-list__item" key={card.id}>
-                                    <MoviesCard isLiked={savedMovies.includes(card.id)} card={card}
-                                                handleLike={handleLike}/>
-                                </li>
-                            ))}
-                            </ul>}
+                        {
+                            isNotFound
+                                ? <p className="not_found">Ничего не найдено</p>
+                                : <ul className="cards-list">
+                                    {movies.map((card) => (
+                                        <li className="cards-list__item" key={card.id}>
+                                            <MoviesCard
+                                                isLiked={savedMovies.includes(card.id)}
+                                                card={card}
+                                                handleLike={handleLike}
+                                            />
+                                        </li>
+                                    ))}
+                                </ul>
+                        }
                     </SectionComponent>
                     {canLoadMore && (
                         <SectionComponent type="more">

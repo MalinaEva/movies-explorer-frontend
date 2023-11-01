@@ -35,9 +35,10 @@ function Navigation ({ isMenuOpen, setIsMenuOpen }) {
 
     return (
         <>
-            <button type="button"
-                    className={`header__menu-icon ${location.pathname === '/' ? 'header__menu-icon_type_white' : ''}`}
-                    onClick={openMenu}
+            <button
+                type="button"
+                className={`header__menu-icon ${location.pathname === '/' ? 'header__menu-icon_type_white' : ''}`}
+                onClick={openMenu}
             />
             <div onClick={closeMenu} className={`overlay ${isMenuOpen ? 'overlay_opened' : ''}`}></div>
             <nav className={`header__nav ${isMenuOpen ? 'header__nav_opened' : ''}`}>

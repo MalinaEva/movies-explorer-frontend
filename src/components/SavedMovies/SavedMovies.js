@@ -14,6 +14,7 @@ function SavedMovies () {
     const [cards, setCards] = useState([]);
     const [keyword, setKeyword] = useState('');
     const [isShort, setIsShort] = useState(false);
+    const [isNotFound, setIsNotFound] = useState(false);
     const { addToast } = useToast();
 
     const handleDelete = async (movie) => {
@@ -21,7 +22,7 @@ function SavedMovies () {
             await deleteMovie(movie._id, localStorage.getItem('token'));
             addToast('Фильм успешно удалён', 'success');
         } catch (err) {
-            addToast(`${err.message || err}`, 'error');
+            addToast(err.message);
             return;
         }
         setSavedMovies(savedMovies.filter(savedMovie => savedMovie._id !== movie._id));
@@ -34,44 +35,70 @@ function SavedMovies () {
             }
             return item;
         }));
-        setCards(cards.filter((item) => item._id !== movie._id));
+        const filtered = cards.filter((item) => item._id !== movie._id);
+        setCards(filtered);
+        if (filtered.length === 0) {
+            setIsNotFound(true);
+        }
     };
 
     useEffect(() => {
+        if (savedMovies.length > 0) {
+            setCards(savedMovies);
+            return;
+        }
         setIsLoading(true);
         getSavedMovies(localStorage.getItem('token'))
-        .then((cards) => {
-            setCards(cards);
-            setSavedMovies(cards);
+        .then((fetchedCards) => {
+            setCards(fetchedCards);
+            setSavedMovies(fetchedCards);
         })
         .catch((err) => {
-            addToast(`${err.message || err}`);
+            addToast(err.message);
         })
         .finally(() => {
             setIsLoading(false);
         });
-    }, [addToast, setSavedMovies]);
+    }, []);
 
-    const handleSubmit = async () => {
-        const filtered = filterMovies(cards, keyword, isShort);
-        setSavedMovies(filtered);
+    const handleSubmit = (searchTerm, isShortFilter) => {
+        setIsNotFound(false);
+        const filtered = filterMovies(savedMovies, searchTerm, isShortFilter);
+        setCards(filtered);
+        if (filtered.length === 0) {
+            setIsNotFound(true);
+        }
+    };
+
+    const onFilter = (isShortFilter) => {
+        setIsShort(isShortFilter);
+        handleSubmit(keyword, isShortFilter);
     };
 
     return (
         <>
-            <SearchForm keyword={keyword} onKeywordChange={setKeyword} onSubmit={handleSubmit} isShort={isShort}
-                        setIsShort={setIsShort}/>
+            <SearchForm
+                keyword={keyword}
+                onKeywordChange={setKeyword}
+                onSubmit={handleSubmit}
+                isShort={isShort}
+                onFilter={onFilter}
+            />
             {isLoading ? (
                 <Preloader/>
             ) : (
                 <SectionComponent type="cards">
-                    <ul className="cards-list">
-                        {savedMovies.map((card) => (
-                            <li className="cards-list__item" key={card._id}>
-                                <MoviesCard card={card} isSaved={true} handleLike={handleDelete}/>
-                            </li>
-                        ))}
-                    </ul>
+                    {
+                        isNotFound
+                            ? <p className="not_found">Ничего не найдено</p>
+                            : <ul className="cards-list">
+                                {cards.map((card) => (
+                                    <li className="cards-list__item" key={card._id}>
+                                        <MoviesCard card={card} isSaved={true} handleLike={handleDelete}/>
+                                    </li>
+                                ))}
+                            </ul>
+                    }
                 </SectionComponent>
 
             )}

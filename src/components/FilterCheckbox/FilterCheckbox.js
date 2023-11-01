@@ -1,10 +1,11 @@
 import './FilterCheckbox.css';
 
-function FilterCheckbox ({ isShort, setIsShort }) {
+function FilterCheckbox ({ isShort, onFilter }) {
     return (
         <>
             <input checked={isShort}
-                   onChange={(e) => setIsShort(e.target.checked)} className="search__toggle"
+                   onChange={ () => onFilter(!isShort)}
+                   className="search__toggle"
                    id="short-films"
                    type="checkbox"
             />

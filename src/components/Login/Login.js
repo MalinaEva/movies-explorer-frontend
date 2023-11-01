@@ -33,7 +33,7 @@ function Login () {
                 navigate('/movies');
             } catch (err) {
                 setCurrentUser(null);
-                setErrorMessage(`${err.message || err}`);
+                setErrorMessage(err.message);
             } finally {
                 setIsLoading(false);
             }
@@ -47,27 +47,32 @@ function Login () {
             <FormComponent onSubmit={handleSubmit} formType="login">
                 <div className="form__row form__row_layout_column">
                     <FormLabel>E-mail</FormLabel>
-                    <FormInput additionalClass="form__input_type_auth" placeholder="Введите e-mail"
-                               inputType="email"
-                               name="email"
-                               value={values.email || ''}
-                               onChange={handleChange}
-                               rules={{
-                                   type: 'email',
-                                   required: true,
-                                   pattern: '[a-z0-9._%+\\-]+@[a-z0-9.\\-]+\\.[a-z]{2,4}$'
-                               }}
-                               error={errors.email}
+                    <FormInput
+                        additionalClass="form__input_type_auth"
+                        placeholder="Введите e-mail"
+                        inputType="email"
+                        name="email"
+                        value={values.email || ''}
+                        onChange={handleChange}
+                        rules={{
+                            type: 'email',
+                            required: true,
+                            pattern: '[a-z0-9._%+\\-]+@[a-z0-9.\\-]+\\.[a-z]{2,4}$'
+                        }}
+                        error={errors.email}
                     />
                 </div>
                 <div className="form__row form__row_layout_column">
                     <FormLabel>Пароль</FormLabel>
-                    <FormInput additionalClass="form__input_type_auth" inputType="password" placeholder="Введите пароль"
-                               name="password"
-                               value={values.password || ''}
-                               onChange={handleChange}
-                               rules={{ minLength: 6, maxLength: 40, required: true }}
-                               error={errors.password}
+                    <FormInput
+                        additionalClass="form__input_type_auth"
+                        inputType="password"
+                        placeholder="Введите пароль"
+                        name="password"
+                        value={values.password || ''}
+                        onChange={handleChange}
+                        rules={{ minLength: 6, maxLength: 40, required: true }}
+                        error={errors.password}
                     />
                 </div>
                 <div className="form__row form__row_type_center">
@@ -75,8 +80,7 @@ function Login () {
                     {errorMessage && <p className="form__error">{errorMessage}</p>}
                 </div>
             </FormComponent>
-            <p className="helptext">Ещё не зарегистрированы? <Link className="section__link"
-                                                                         to="/signup">Регистрация</Link></p>
+            <p className="helptext">Ещё не зарегистрированы? <Link className="section__link" to="/signup">Регистрация</Link></p>
         </SectionComponent>
     );
 }

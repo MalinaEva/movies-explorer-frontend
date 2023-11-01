@@ -11,7 +11,6 @@ import { useMovies } from '../../contexts/MoviesContext';
 function Movies () {
     const { addToast } = useToast();
     const { movies, setMovies, savedMovies, setSavedMovies } = useMovies();
-
     const [keyword, setKeyword] = useState(localStorage.getItem('searchKeyword') || '');
     const [cardLimit, setCardLimit] = useState(16);
     const [cards, setCards] = useState([]);
@@ -22,14 +21,6 @@ function Movies () {
     const [isShort, setIsShort] = useState(localStorage.getItem('isShort') === 'true');
     const [errorMessage, setErrorMessage] = useState('');
     const [isNotFound, setIsNotFound] = useState(false);
-
-    useEffect(() => {
-        localStorage.setItem('isShort', isShort);
-    }, [isShort]);
-
-    useEffect(() => {
-        localStorage.setItem('searchKeyword', keyword);
-    }, [keyword]);
 
     useEffect(() => {
         localStorage.setItem('moviesData', JSON.stringify(movies));
@@ -44,6 +35,7 @@ function Movies () {
     }, [cardLimit, movies]);
 
     useEffect(() => {
+        setIsLoading(true);
         Promise.all([
             loadMovies(),
             getSavedMovies(localStorage.getItem('token'))
@@ -52,33 +44,46 @@ function Movies () {
             setSavedCards(loadSavedCards);
             setSavedMovies(loadSavedCards);
         }).catch((err) => {
-            addToast(`${err.message || err}`, 'error');
+            addToast(`${err.message}`);
+        }).finally(() => {
+            setIsLoading(false);
         });
-    }, [addToast, setSavedMovies]);
+    }, []);
 
-    const onSubmit = async (searchTerm) => {
+    const onSubmit = (searchTerm, isShortFilter) => {
         setErrorMessage('');
         setKeyword(searchTerm);
         setIsNotFound(false);
         setIsLoading(true);
+        localStorage.setItem('searchKeyword', searchTerm);
         try {
             const moviesWithLikes = cards.map(movie => ({
                 ...movie,
                 isLiked: savedCards.some(savedMovie => savedMovie.movieId === movie.id)
             }));
 
-            const filtered = filterMovies(moviesWithLikes, searchTerm, isShort);
+            const filtered = filterMovies(moviesWithLikes, searchTerm, isShortFilter);
             if (filtered.length === 0) {
                 setIsNotFound(true);
-            } else {
-                setMovies(filtered);
             }
+            setMovies(filtered);
         } catch (err) {
+            setMovies([]);
             setErrorMessage('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
         } finally {
             setIsLoading(false);
         }
     };
+
+    const onFilter = (isShortFilter) => {
+        if (!keyword) {
+            addToast('Нужно ввести ключевое слово');
+            return;
+        }
+        setIsShort(isShortFilter);
+        localStorage.setItem('isShort', isShortFilter);
+        onSubmit(keyword, isShortFilter);
+    }
 
     const handleLike = async (movie) => {
         return movie.isLiked ? await handleDeleteMovie(movie) : await handleSaveMovie(movie);
@@ -104,7 +109,7 @@ function Movies () {
             setMovies(updatedMovies);
             setSavedMovies([...savedMovies, savedMovie]);
         } catch (err) {
-            addToast(`${err.message || err}`);
+            addToast(err.message);
         }
     };
 
@@ -117,22 +122,21 @@ function Movies () {
             setMovies(updatedMovies);
             setSavedMovies(savedMovies.filter(savedMovie => savedMovie.movieId !== movie.id));
         } catch (err) {
-            addToast(`${err.message || err}`);
+            addToast(err.message);
         }
-    };
-
-    const handleShort = () => {
-        setIsShort(!isShort);
     };
 
     useEffect(() => {
         const savedKeyword = localStorage.getItem('searchKeyword');
         const savedMoviesData = JSON.parse(localStorage.getItem('moviesData')) || [];
 
-        if (savedKeyword && savedMoviesData.length > 0) {
+        if (savedKeyword) {
             setMovies(savedMoviesData);
         }
-    }, [setMovies]);
+        if (savedKeyword && savedMoviesData.length === 0) {
+            setIsNotFound(true);
+        }
+    }, []);
 
     useEffect(() => {
         const handleResize = () => {
@@ -162,9 +166,14 @@ function Movies () {
 
     return (
         <>
-            <SearchForm errorMessage={errorMessage} onSubmit={onSubmit} keyword={keyword} isShort={isShort}
-                        setIsShort={handleShort}
-                        onKeywordChange={setKeyword}/>
+            <SearchForm
+                errorMessage={errorMessage}
+                onSubmit={onSubmit}
+                onFilter={onFilter}
+                keyword={keyword}
+                isShort={isShort}
+                onKeywordChange={setKeyword}
+            />
             <MoviesCardList
                 movies={movies.slice(0, cardLimit)}
                 savedMovies={savedMovies}

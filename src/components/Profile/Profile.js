@@ -9,19 +9,23 @@ import { useNavigate } from 'react-router-dom';
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
 import { useFormWithValidation } from '../../hooks/useFormWithValidation';
 import { updateProfile } from '../../utils/MainApi';
-import { useToast } from '../../contexts/ToastContext';
 import { useMovies } from '../../contexts/MoviesContext';
 
 function Profile () {
     const { currentUser, setCurrentUser } = useCurrentUser();
-    const { addToast } = useToast();
     const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation();
     const [isLoading, setIsLoading] = useState(false);
-    const [errorMessage, setErrorMessage] = useState('');
+    const [message, setMessage] = useState({ 'text': '', 'type': '' });
     const [isChanged, setIsChanged] = useState(false);
     const { setMovies, setSavedMovies } = useMovies();
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (Object.keys(errors).length > 0 && message.text) {
+            setMessage({ 'text': '', 'type': '' });
+        }
+    }, [errors]);
 
     useEffect(() => {
         if (currentUser) {
@@ -38,15 +42,18 @@ function Profile () {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        setErrorMessage('');
+        setMessage({ 'text': '', 'type': '' });
         setIsLoading(true);
         try {
             const updateData = await updateProfile(values.name, values.email, localStorage.getItem('token'));
             setCurrentUser(updateData);
             setIsChanged(false);
-            addToast('Данные успешно обновлены', 'success');
+            setMessage({ 'text': 'Данные успешно обновлены', 'type': 'success' });
+            setTimeout(() => {
+                setMessage({ 'text': '', 'type': '' });
+            }, 5000);
         } catch (err) {
-            setErrorMessage(`${err.message || err}`);
+            setMessage({ 'text': err.message, 'type': 'error' });
         } finally {
             setIsLoading(false);
         }
@@ -65,45 +72,49 @@ function Profile () {
 
     return (
         <SectionComponent type="profile">
-            <h1 className="section__header section__header_type_profile">Привет, {values.name}!</h1>
+            <h1 className="section__header section__header_type_profile">Привет, {currentUser.name}!</h1>
             <FormComponent onSubmit={handleSubmit} formType="edit-profile">
                 <div className="form__row form__row_layout_between form__divider">
                     <div className="form__col">
-                    <FormLabel>Имя</FormLabel>
-                    <FormInput additionalClass="form__input_type_right" placeholder="Введите имя"
-                               name="name"
-                               rules={{
-                                   minLength: 2,
-                                   maxLength: 30,
-                                   required: true,
-                                   pattern: '^[a-zA-Zа-яА-ЯёЁ\\s\\-]+$'
-                               }}
-                               onChange={handleChange}
-                               value={values.name || ''}
-                    />
+                        <FormLabel>Имя</FormLabel>
+                        <FormInput
+                            additionalClass="form__input_type_right"
+                            placeholder="Введите имя"
+                            name="name"
+                            rules={{
+                                minLength: 2,
+                                maxLength: 30,
+                                required: true,
+                                pattern: '^[a-zA-Zа-яА-ЯёЁ\\s\\-]+$'
+                            }}
+                            onChange={handleChange}
+                            value={values.name || ''}
+                        />
                     </div>
                     {errors.name && <p className="form__error">{errors.name}</p>}
                 </div>
                 <div className="form__row form__row_layout_between">
                     <div className="form__col">
                         <FormLabel>E-mail</FormLabel>
-                        <FormInput additionalClass="form__input_type_right" placeholder="Введите e-mail"
-                                   name="email"
-                                   rules={{
-                                       type: 'email',
-                                       required: true,
-                                       pattern: '[a-z0-9._%+\\-]+@[a-z0-9.\\-]+\\.[a-z]{2,4}$'
-                                   }}
-                                   onChange={handleChange}
-                                   value={values.email || ''}
+                        <FormInput
+                            additionalClass="form__input_type_right"
+                            placeholder="Введите e-mail"
+                            name="email"
+                            rules={{
+                                type: 'email',
+                                required: true,
+                                pattern: '[a-z0-9._%+\\-]+@[a-z0-9.\\-]+\\.[a-z]{2,4}$'
+                            }}
+                            onChange={handleChange}
+                            value={values.email || ''}
                         />
                     </div>
                     {errors.email && <p className="form__error">{errors.email}</p>}
                 </div>
                 <div className="form__row form__row_type_center">
+                    {message.text && <p className={`form__${message.type}`}>{message.text}</p>}
                     <FormButton disabled={!isValid || isLoading || !isChanged} buttonType="submit"
                                 type="edit">Редактировать</FormButton>
-                    {errorMessage && <p className="form__error">{errorMessage}</p>}
                 </div>
             </FormComponent>
             <FormComponent onSubmit={handleLogout} formType="logout">

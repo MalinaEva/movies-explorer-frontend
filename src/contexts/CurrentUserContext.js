@@ -19,14 +19,17 @@ export const CurrentUserProvider = ({ children }) => {
             return;
         }
 
+        if (currentUser) {
+            return;
+        }
         getUserInfo(token)
         .then((userData) => {
             setCurrentUser(userData);
         }).catch((error) => {
-            addToast(`${error.message || error}`);
+            addToast(error.message);
             setCurrentUser(null);
         });
-    }, [addToast]);
+    }, []);
 
     return (
         <CurrentUserContext.Provider value={{ currentUser, setCurrentUser }}>
