@@ -1,0 +1,15 @@
+.form__label {
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 13.31px;
+    color: #000;
+    width: auto;
+    white-space: nowrap;
+}
+
+.form__label_size_small {
+    font-size: 10px;
+    line-height: 12.1px;
+    font-weight: 400;
+}
+

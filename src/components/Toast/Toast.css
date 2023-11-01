@@ -1,0 +1,39 @@
+.toasts {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 1000;
+}
+
+.toasts_item {
+    background: #333;
+    color: white;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/*.toasts {*/
+/*    position: relative;*/
+/*}*/
+
+/*.toasts_item {*/
+/*    position: fixed;*/
+/*    right: 20px;*/
+/*    bottom: 20px;*/
+/*    background: #333;*/
+/*    color: white;*/
+/*    padding: 10px;*/
+/*    border-radius: 5px;*/
+/*    z-index: 1000;*/
+/*    cursor: pointer;*/
+/*}*/
+
+.toasts_item_success {
+    background: #4caf50;
+}
+
+.toasts_item_error {
+    background: #f44336;
+}

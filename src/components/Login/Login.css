@@ -1,0 +1,22 @@
+.section__header_type_login {
+    width: 396px;
+    margin: 0 auto 40px;
+    padding: 0;
+    border: none;
+    font-size: 24px;
+    line-height: 29.05px;
+    font-weight: 500;
+    letter-spacing: normal;
+}
+
+@media (min-width: 768px) and (max-width: 1279px) {
+    .section__header_type_login {
+        padding-top: 10px;
+    }
+}
+
+@media (max-width: 767px) {
+    .section__header_type_login {
+        margin: 33px auto 78px;
+    }
+}

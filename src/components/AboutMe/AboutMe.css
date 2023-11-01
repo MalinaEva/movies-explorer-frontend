@@ -1,0 +1,124 @@
+.student {
+    margin: 0 auto;
+    max-width: 1140px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.student__header {
+    font-size: 50px;
+    line-height: 58px;
+    font-weight: 400;
+    margin: 0 0 18px;
+    letter-spacing: -2px;
+}
+
+.student__info {
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
+.student__about {
+    line-height: 22px;
+    font-size: 14px;
+    font-weight: 400;
+    margin: 26px 0 0;
+}
+
+.student__avatar {
+    width: 270px;
+    border-radius: 10px;
+}
+
+.student__subheader {
+    margin: 0;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 20px;
+}
+
+.student__link {
+    color: #000;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16.94px;
+    text-decoration: none;
+    margin-top: auto;
+}
+
+.student__link:hover {
+    opacity: .7;
+}
+
+@media (min-width: 768px) and (max-width: 1279px) {
+    .student__header {
+        font-size: 40px;
+        line-height: 40px;
+        letter-spacing: -1.6px;
+        margin-bottom: 11px;
+    }
+
+    .student__subheader {
+        font-size: 12px;
+        line-height: 18px;
+    }
+
+    .student__info {
+        max-width: 364px;
+    }
+
+    .student__about {
+        font-size: 12px;
+        line-height: 18px;
+        margin-top: 20px;
+    }
+
+    .student__avatar {
+        width: 255px;
+    }
+
+    .student__portfolio-header {
+        margin-top: 84px;
+    }
+
+    .student__portfolio-link {
+        font-size: 28px;
+        line-height: 50px;
+        letter-spacing: -1.12px;
+    }
+}
+
+@media (max-width: 767px) {
+    .student__info {
+        order: 2;
+    }
+
+    .student__avatar {
+        order: 1;
+        width: 292px;
+    }
+
+    .student__portfolio {
+        order: 3;
+    }
+
+    .student__header {
+        font-size: 30px;
+        line-height: 36.31px;
+        letter-spacing: -1.2px;
+        margin-top: 38px;
+    }
+
+    .student__subheader {
+        font-size: 11px;
+        line-height: 16px;
+    }
+
+    .student__about {
+        font-size: 11px;
+        line-height: 16px;
+        margin: 20px 0 42px;
+    }
+}

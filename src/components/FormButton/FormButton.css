@@ -1,0 +1,75 @@
+.form__btn {
+    background-color: #fff;
+    border: none;
+    font-size: 13px;
+    line-height: 15.73px;
+    text-align: center;
+    cursor: pointer;
+    display: block;
+}
+
+.form__btn:hover {
+    opacity: .8;
+}
+
+.form__btn_type_edit {
+    color: #000;
+    margin-top: 205px;
+}
+
+.form__btn_type_logout {
+    color: #FF3055;
+    font-weight: 500;
+    margin: 14px 0 70px;
+    text-decoration: none;
+}
+
+.form__btn_type_signup {
+    background-color: #3456F3;
+    color: #fff;
+    padding: 13px 13px 15px;
+    display: block;
+    width: 100%;
+    font-size: 14px;
+    line-height: 16.94px;
+    margin-top: 127px;
+    font-weight: 500;
+    border-radius: 3px;
+}
+
+.form__btn_type_signin {
+    background-color: #3456F3;
+    color: #fff;
+    padding: 13px 13px 15px;
+    display: block;
+    width: 100%;
+    font-size: 14px;
+    line-height: 16.94px;
+    margin-top: 221px;
+    border-radius: 3px;
+}
+
+.form__btn_disabled {
+    opacity: .5;
+    cursor: not-allowed;
+}
+
+.form__btn_disabled:hover {
+    opacity: .5;
+}
+
+@media (min-width: 768px) and (max-width: 1279px) {
+    .form__btn_type_edit {
+        margin-top: 196px;
+    }
+}
+
+@media (max-width: 767px) {
+    .form__btn_type_edit {
+        margin-top: 363px;
+    }
+
+    .form__btn_type_signin {
+        margin-top: 310px;
+    }
+}
